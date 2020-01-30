@@ -19,10 +19,13 @@ class ReactCoursePlayer extends Component {
 
   render() {
     if (this.props.source) {
+
+      const { source } = this.props
+
       return (
         <div className={styles['react-course-player']}>
           <div className={styles['react-course-player__header']} style={{background: this.state.colors.accent}}>
-            header {this.props.source.name}
+            header {source.title}
           </div>
           <div className={styles['react-course-player__body']} style={{background: this.state.colors.background}}>
             <div className={styles['react-course-player__video-wrapper']} style={{background: '#000'}}>

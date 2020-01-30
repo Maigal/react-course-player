@@ -9,7 +9,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('course.json')
+    fetch('course/course.json')
     .then(res => res.json())
     .then(res => this.setState({source: res}))
   }
