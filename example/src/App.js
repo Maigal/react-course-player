@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'react-course-player'
+import ReactCoursePlayer from 'react-course-player'
 
 export default class App extends Component {
+
+  state = {
+    source: null
+  }
+
+  componentDidMount() {
+    fetch('course.json')
+    .then(res => res.json())
+    .then(res => this.setState({source: res}))
+  }
+
   render () {
     return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
+        <ReactCoursePlayer
+          source={this.state.source}
+        />
     )
   }
 }

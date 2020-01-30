@@ -2,21 +2,46 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
+import { lightColors } from './configs/colors'
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
+class ReactCoursePlayer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      colors: {
+        primary: '#3AAFA9',
+        lighter: '#DEF2F1',
+        accent: '#17252A',
+        background: '#CCC'
+      }
+    }
   }
 
   render() {
-    const {
-      text
-    } = this.props
+    if (this.props.source) {
+      return (
+        <div className={styles['react-course-player']}>
+          <div className={styles['react-course-player__header']} style={{background: this.state.colors.accent}}>
+            header {this.props.source.name}
+          </div>
+          <div className={styles['react-course-player__body']} style={{background: this.state.colors.background}}>
+            <div className={styles['react-course-player__video-wrapper']} style={{background: '#000'}}>
+              <video src='' controls />
+            </div>
 
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>Loading...</div>
+      )
+    }
   }
 }
+
+ReactCoursePlayer.propTypes = {
+  source: PropTypes.object
+}
+
+export default ReactCoursePlayer
