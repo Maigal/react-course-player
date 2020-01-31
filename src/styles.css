@@ -32,3 +32,33 @@
   width: 100%;
   height: 95%;
 }
+
+.react-course-player__menu {
+  display: flex;
+  flex-basis: 20%;
+  flex-direction: column;
+}
+
+.react-course-player__section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.react-course-player__section-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid blue;
+  width: 100%;
+}
+
+.react-course-player__lesson {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid green;
+  width: 100%;
+}

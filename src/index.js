@@ -21,6 +21,7 @@ class ReactCoursePlayer extends Component {
     if (this.props.source) {
 
       const { source } = this.props
+      const { sections } = source
 
       return (
         <div className={styles['react-course-player']}>
@@ -30,6 +31,20 @@ class ReactCoursePlayer extends Component {
           <div className={styles['react-course-player__body']} style={{background: this.state.colors.background}}>
             <div className={styles['react-course-player__video-wrapper']} style={{background: '#000'}}>
               <video src='' controls />
+            </div>
+            <div className={styles['react-course-player__menu']}>
+              {
+                sections.map((section, sectionIndex) => (
+                  <div className={styles['react-course-player__section']}>
+                    <div className={styles['react-course-player__section-title']}> {section.section_title} </div>
+                    {
+                      section.videos.map(((video, videoIndex) => (
+                        <div className={styles['react-course-player__lesson']}>{video.title}</div>
+                      )))
+                    }
+                  </div>
+                ))
+              }
             </div>
 
           </div>
