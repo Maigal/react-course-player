@@ -9,22 +9,24 @@ class ReactCoursePlayer extends Component {
     super(props)
     this.state = {
       currentSection: null,
-      currentVideo: null,
+      currentVideoPath: null,
       currentSearch: '',
+      selectedSection: '',
+      selectedVideo: '',
       colors: {
         primary: '#3AAFA9',
         lighter: '#DEF2F1',
         accent: '#17252A',
         background: '#FFFFFF',
         textPrimary: '#FFFFFF',
-        textSecondary: '#353433'
+        textSecondary: '#444'
       }
     }
   }
 
   videoSelectionHandler(section, video) {
     const nextVideoPath = this.props.source.path + section.path + video.filename + '#t=0.9'
-    this.setState({currentVideo: nextVideoPath})
+    this.setState({currentVideoPath: nextVideoPath, selectedVideo: video.title, selectedSection: section.section_title})
   }
 
   searchInputHandler(query) {
@@ -48,15 +50,17 @@ class ReactCoursePlayer extends Component {
 
       return (
         <div className={styles['react-course-player']}>
-          <div className={styles['react-course-player__header']} style={{background: this.state.colors.accent}}>
-            header {source.title}
+          <div className={styles['react-course-player__header']} style={{background: colors.accent, color: colors.textPrimary}}>
+            <span>{source.title + ' / ' + this.state.selectedSection + ' / ' + this.state.selectedVideo}</span>
+            <input type='text' style={{padding: '5px'}} value={this.state.currentSearch} onChange={(e) => this.searchInputHandler(e.target.value)} />
+
           </div>
           <div className={styles['react-course-player__body']} style={{background: this.state.colors.background}}>
             <div className={styles['react-course-player__video-wrapper']} style={{background: '#000'}}>
-              <video src={this.state.currentVideo} preload='metadata' controls />
+              <video src={this.state.currentVideoPath} preload='metadata' controls />
             </div>
             <div className={styles['react-course-player__menu']}>
-              <input type='text' style={{padding: '5px'}} value={this.state.currentSearch} onChange={(e) => this.searchInputHandler(e.target.value)} />
+              
               {
                 sections.filter(section => this.isSectionMatchingSearch(section.videos)).map((section, sectionIndex) => (
                   <div className={styles['react-course-player__section']}>
@@ -65,7 +69,7 @@ class ReactCoursePlayer extends Component {
                       section.videos.filter(video => this.isLessonMatchingSearch(video.title)).map((video, videoIndex) => (
 
                         <div
-                          className={styles['react-course-player__lesson']}
+                          className={`${styles['react-course-player__lesson']} ${this.state.selectedVideo === video.title ? styles['np'] : null}`}
                           style={{ background: videoIndex % 2 === 0 ? colors.background : colors.lighter, color: colors.textSecondary }}
                           onClick={() => this.videoSelectionHandler(section, video)}
                         >
