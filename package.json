@@ -1,6 +1,6 @@
 {
   "name": "react-course-player",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component to generate courses based on json data",
   "author": "Maigal",
   "license": "MIT",
